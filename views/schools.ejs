@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My School - Schools</title>
+   
+           <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/owl.carousel.min.css">
+      <link rel="stylesheet" href="css/owl.theme.default.min.css">
+      <link rel="stylesheet" href="../dashboard_public/vendor/fontawesome-free/css/all.min.css">
+      <link rel="stylesheet" href="css/style.css">
+      <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+      <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700,800" rel='stylesheet' type='text/css'>
+  
+    <style>
+          
+.form-control-borderless {  
+    border: none;  
+}  
+.form-control-borderless:focus {  
+    border: none;  
+    outline: none;  
+    box-shadow: none;  
+}  
+.form-control-borderless:hover {  
+    border: none;  
+    outline: none;  
+    box-shadow: none;  
+}  
+.form-control-borderless:active {  
+    border: none;  
+    outline: none;  
+    box-shadow: none;  
+}
+        input,
+        textarea,
+        button {
+            height: 25px;
+            margin: 0;
+            padding: 10px;
+            font-family: Raleway, sans-serif;
+            font-weight: normal;
+            font-size: 12pt;
+            outline: none;
+            border-radius: 0;
+            background: none;
+            border: 1px solid #282B33;
+        }
+
+        button,
+        select {
+            height: 45px;
+            padding: 0 15px;
+            cursor: pointer;
+        }
+
+        button {
+            background: none;
+            border: 1px solid black;
+            margin: 25px 0;
+        }
+
+        button:hover {
+            background-color: #282B33;
+            color: white;
+        }
+
+
+        .tools {
+            overflow: auto;
+            zoom: 1;
+        }
+
+        .search-area {
+            float: left;
+            width: 60%;
+        }
+
+        .settings {
+            display: none;
+            float: right;
+            width: 40%;
+            text-align: right;
+        }
+
+        #view {
+            display: none;
+            width: auto;
+            height: 47px;
+        }
+
+        #searchbutton {
+            width: 60px;
+            height: 47px;
+        }
+
+        input#search {
+            width: 30%;
+            width: calc(100% - 90px);
+            padding: 10px;
+            border: 1px solid #282B33;
+        }
+
+        @media screen and (max-width:400px) {
+            .search-area {
+                width: 100%;
+            }
+        }
+
+        .products {
+            width: 100%;
+            font-family: Raleway;
+        }
+
+        .product {
+            display: inline-block;
+            width: calc(24% - 13px);
+            margin: 10px 10px 30px 10px;
+            vertical-align: top;
+        }
+
+        .product img {
+            display: block;
+            margin: 0 auto;
+            width: auto;
+            height: 200px;
+            max-width: calc(100% - 20px);
+            background-position: fit;
+            box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.8);
+            border-radius: 2px;
+        }
+
+        .product-content {
+            text-align: center;
+        }
+
+        .product h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 10px 0 0 0;
+        }
+
+        .product h3 small {
+            display: block;
+            font-size: 16px;
+            font-weight: 400;
+            font-style: italic;
+            margin: 7px 0 0 0;
+        }
+
+        .product .product-text {
+            margin: 7px 0 0 0;
+            color: #0a53c9;
+        }
+
+        .product .price {
+            font-family: sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .product .genre {
+            font-size: 14px;
+        }
+
+
+        @media screen and (max-width:1150px) {
+            .product {
+                width: calc(33% - 23px);
+            }
+        }
+
+        @media screen and (max-width:700px) {
+            .product {
+                width: calc(50% - 43px);
+            }
+        }
+
+        @media screen and (max-width:400px) {
+            .product {
+                width: 100%;
+            }
+        }
+
+        /* TABLE VIEW */
+
+        @media screen and (min-width:401px) {
+            .settings {
+                display: block;
+            }
+            #view {
+                display: inline;
+            }
+            .products-table .product {
+                display: block;
+                width: auto;
+                margin: 10px 10px 30px 10px;
+            }
+            .products-table .product .product-img {
+                display: inline-block;
+                margin: 0;
+                width: 120px;
+                height: 120px;
+                vertical-align: middle;
+            }
+            .products-table .product img {
+                width: auto;
+                height: 120px;
+                max-width: 120px;
+            }
+            .products-table .product-content {
+                text-align: left;
+                display: inline-block;
+                margin-left: 20px;
+                vertical-align: middle;
+                width: calc(100% - 145px);
+            }
+            .products-table .product h3 {
+                margin: 0;
+            }
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div class="top-nav" id="home">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-auto">
+                    <p> <i class='bx bxs-envelope'></i> example@example.com</p>
+                    <p> <i class='bx bxs-phone-call'></i> (+233) 550 949 748 </p>
+                </div>
+                <div class="col-auto social-icons">
+                    <a href="#"><i class='bx bxl-facebook'></i></a>
+                    <a href="#"><i class='bx bxl-twitter'></i></a>
+                    <a href="#"><i class='bx bxl-instagram'></i></a>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">My School<span class="dot">.</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/services">Services</a>
+                    </li>                   
+                   
+                    <li class="nav-item">
+                        <a class="nav-link" href="/schools">Schools</a>
+                   
+                   
+                </ul>
+               
+            </div>
+        </div>
+    </nav>
+    <section id="milestone">
+        <div class="container">
+          <h1 style="text-align: center;">Welcome To The Index Of My School</h1>
+        </div>
+    </section>
+
+    <section>  
+        <div class="tools">
+            <div class="row justify-content-center">  
+                <div class="col-12 col-md-10 col-lg-8">  
+                    <form class="card card-sm" action="/schools" method="post">  
+                        <div class="card-body row no-gutters align-items-center">  
+                            <div class="col-auto">  
+                                <i class="fa fa-search fa-2x"> </i> 
+                            </div>  
+                                 <div class="col">  
+                                <input class="form-control form-control-lg form-control-borderless" type="search" placeholder=" Schools here...?"  name="search">  
+                            </div>  
+                                       <div class="col-auto">  
+                                <button class="btn btn-lg btn-success" type="submit"> Search </button>  
+                            </div>  
+                             
+                        </div>  
+                    </form>  
+                </div>  
+                  </div> 
+            <div class="settings">
+                <button id="view">Switch View</button>
+            </div>
+        </div>
+        
+        <div class="products products-table">
+            <%
+            if(userData.length!=0){
+            var i=1;
+            userData.forEach(function(data){
+            %>
+            
+            <div class="product">
+                
+                <div class="product-img">
+                    <img src="../dashboard_public/user_image/<%= data.user_image %>">
+                </div>
+                <div class="product-content">
+                    <h3>
+                        <a href="/schools-view/<%= data.user_id %>" target="_blank" style="text-decoration: none; color:coral;"><%= data.name %></a>
+                        <small> <%= data.landmark %> </small>
+                    </h3>
+                    <p class="product-text price"> <%= data.region %> region</p>
+                    <h4 style="color: #9d2d2d;">City/Town: <%= data.city %> </h4>
+                    
+                    <p>School Website: <a href="<%= data.school_website %>" target="_blank"><%= data.school_website %></a> </p>
+                    
+                </div>
+            </div>
+            <%  i++; }) %>
+                    <% } else{ %>
+                       
+                            <p>No Data Found</p>
+                        
+                    <% } %>
+        </div>
+    </section>
+   
+
+   
+
+    <section class="bg-light" id="reviews">
+
+        <div class="owl-theme owl-carousel reviews-slider container">
+            
+            <div class="review">
+                <div class="person">
+                    <img src="img/team_1.jpg" alt="">
+                    <h5>Ralph Edwards</h5>
+                    <small>Market Development Manager</small>
+                </div>
+                <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut quis, rem culpa labore voluptate
+                    ullam! In, nostrum. Dicta, vero nihil. Delectus minus vitae rerum voluptatum, excepturi incidunt ut,
+                    enim nam exercitationem optio ducimus!</h3>
+                <div class="stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class="bx bxs-star-half"></i>
+                </div>
+                <i class='bx bxs-quote-alt-left'></i>
+            </div>
+           
+        </div>
+    </section>
+
+    
+    <footer>
+        <div class="footer-top text-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h4 class="navbar-brand">My School<span class="dot">.</span></h4>
+                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
+                            classical Latin literature from</p>
+                        <div class="col-auto social-icons">
+                            <a href="#"><i class='bx bxl-facebook'></i></a>
+                            <a href="#"><i class='bx bxl-twitter'></i></a>
+                            <a href="#"><i class='bx bxl-instagram'></i></a>
+                            <a href="#"><i class='bx bxl-pinterest'></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn btn-danger text-black-50 text-center"><a href="/index">Click To Login</a></div>
+        <div class="footer-bottom text-center">
+            <p class="mb-0">Copyright@2022. All rights Reserved</p>
+        </div>
+    </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        $("#view").click(function () {
+            $(".products").toggleClass("products-table");
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+ 
+    <!-- Bootstrap core CSS-->
+    <link href="../../../dashboard_public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <!-- Page level plugin CSS-->
+
+    <!-- Custom styles for this template-->
+    <link href="../../../dashboard_public/css/sb-user.css" rel="stylesheet">
+    <!-- Print css File -->
+    <link type="text/css" media="print" rel="stylesheet" href="../../../css/print.css">
+    
+    <title>View Student</title>
+</head>
+<body>
+    <%
+    if(userData.length!=0){
+    var i=1;
+    userData.forEach(function(data){
+    %>
+    <section style="background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(29,97,253,1) 50%, rgba(194,155,117,1) 97%, rgba(252,176,69,1) 100%);
+">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col">
+              <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                <a href="/user/tables">
+                    <button type="button" class="btn btn-primary">Go Back</button>
+
+                </a>
+              </nav>
+            </div>
+          </div>
+      
+          <div class="row print" >
+            <div class="col-lg-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                        <%- include('../../Includes/messages.ejs') %>
+                        <img src="../../../dashboard_public/student_image/<%= data.student_image %> " class="img-fluid" alt="avatar" >
+                        
+                        <form action="/user/update-student-profile/<%= data.student_id%>" method="POST" enctype="multipart/form-data">
+                          <var>Upload Profile Photo</var>
+                          <input type="file" class="mx-1 py-4"  name="student_image" accept="image/*">
+                          <input type="submit" class="btn btn-primary">          
+                        </form>
+                      </div>
+              </div>
+             
+            </div>
+            <div class="col-lg-8">
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Student ID</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0"><%= data.student_id %></p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Student Full Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0"><%= data.student_name %></p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Date OF Birth</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0"><%= data.dob %></p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Gender</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0"><%= data.gender %></p>
+                    </div>
+                  </div>
+                  
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Parent Full Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0"><%= data.parent_name %></p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Parent Phone</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">0<%= data.parent_mobile_number %></p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Parent Address</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0"><%= data.address %></p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Arrears</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0"><%= data.current_fees %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+        <p class="text-black mb-0 " style="text-align: center;">Notice: An Account Balance of Null definively rules the conjunction that the student is of choice to leave his/her respective school, if and when they chose to! Thank You!</p>
+
+        <button type="button" class="btn btn-primary py-2 px-5 my-5 mx-3" onclick="window.print();return false;" />Print <i class="fas fa-print"></i></button>
+
+      </section>
+      <%  i++; }) %>
+                    <% } else{ %>
+                        <tr>
+                            <td colspan="7">No Data Found</td>
+                        </tr>
+                    <% } %>
+   
+    <!-- Bootstrap core JavaScript-->
+    <script src="../../../dashboard_public/vendor/jquery/jquery.min.js"></script>
+    <script src="../../../dashboard_public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../../../dashboard_public/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Page level plugin JavaScript-->
+
+   
+
+    <!-- Custom scripts for all pages-->
+    <script src="../../../dashboard_public/js/sb-user.min.js"></script>
+
+    <!-- Demo scripts for this page-->
+</body>
+</html>

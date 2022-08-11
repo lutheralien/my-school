@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Style for modal -->
+    <style>
+
+    button{
+  border-radius: 20px;
+  box-shadow: 5px 10px #888888;  
+}
+    button:hover {
+  padding: 20px 20px 10px 10px;
+}
+    </style>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/style.css">
+    <title>My School - Index</title>
+</head>
+<body>
+
+      <!-- TOP NAV -->
+      <div class="top-nav" id="home">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-auto">
+                    <p> <i class='bx bxs-envelope'></i> example@example.com</p>
+                    <p> <i class='bx bxs-phone-call'></i> (+233) 550 949 748 </p>
+                </div>
+                <div class="col-auto social-icons">
+                    <a href="#"><i class='bx bxl-facebook'></i></a>
+                    <a href="#"><i class='bx bxl-twitter'></i></a>
+                    <a href="#"><i class='bx bxl-instagram'></i></a>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">My School<span class="dot">.</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/services">Services</a>
+                    </li>                   
+                   
+                    <li class="nav-item">
+                        <a class="nav-link" href="/schools">Schools</a>
+                   
+                   
+                </ul>
+               
+            </div>
+        </div>
+    </nav>
+
+    <div class="d-grid gap-2 col-10 mx-auto">
+      <button class="btn btn-danger" type="button" id="admin-btn" onclick="location.href = '/Admin/login'">Super Admin</button>
+      <br>
+      <button class="btn btn-warning" type="button" id="user-btn"
+      onclick="location.href = '/User/login'">School Admin</button>
+    </div>
+
+    
+      
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

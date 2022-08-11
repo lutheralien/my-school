@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .gradient-custom {
+      /* fallback for old browsers */
+      background: #b293fb;
+
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: -webkit-linear-gradient(
+        to bottom right,
+        rgb(62, 42, 212),
+        rgb(54, 40, 216)
+      );
+
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: linear-gradient(
+        to bottom right,
+        rgb(72, 63, 238),
+        rgb(121, 58, 228)
+      );
+    }
+
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+      font-size: 1rem;
+      line-height: 2.15;
+      padding-left: 0.75em;
+      padding-right: 0.75em;
+    }
+    .card-registration .select-arrow {
+      top: 13px;
+    }
+    select {
+        appearance: none;
+        outline: 0;
+        background: rgb(27, 244, 247);
+        background-image: none;
+        width: 100%;
+        height: 100%;
+        color: black;
+        cursor: pointer;
+        border: 1px solid black;
+        border-radius: 10px;
+        margin: 10px;
+    }
+  </style>
+   <link
+   href="../../../dashboard_public/vendor/bootstrap/css/bootstrap.min.css"
+   rel="stylesheet"
+ />
+
+ <!-- Custom fonts for this template-->
+
+ <link
+   rel="stylesheet"
+   href="../../../dashboard_public/vendor/fontawesome-free/css/all.min.css"
+ />
+ <!-- Page level plugin CSS-->
+
+ <!-- Custom styles for this template-->
+ <link href="../../../dashboard_public/css/sb-user.css" rel="stylesheet" />
+  <title>School Admin - Update user Info</title>
+</head>
+
+
+<body id="page-top">
+  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+    <a class="navbar-brand mr-1" href="/user/dashboard">Menu</a>
+    
+    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+    
+
+    <!-- Navbar Search -->
+    <form
+      class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
+    ></form>
+
+    <!-- Navbar -->
+  </nav>
+
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="sidebar navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/user/dashboard">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/user/register-student">
+          <i class="fas fa-address-card"></i>
+          <span>Register a Student</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/user/tables">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Registered Students</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/user/pending-school-fee">
+          <i class="fas fa-user-circle"></i>
+          <span>General Pending Arrears</span></a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="/user/student-data-sheet">
+          <i class="fas fa-fw fa-table"></i>
+          <span>School Data Sheet</span></a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="/user/school-settings">
+          <i class="fas fa-users-cog"></i>
+          <span>School Settings</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/user/logout">
+          <i class="fa fa-sign-out-alt"></i>
+          <span>Logout</span></a
+        >
+      </li>
+    </ul>
+
+    <div id="content-wrapper">
+      <!-- /.container-fluid -->
+      <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+              <div
+                class="card shadow-2-strong card-registration"
+                style="border-radius: 15px"
+              >
+                <div class="card-body p-4 p-md-5">
+                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Update School Admin Form</h3>
+                  <%
+                  if(userData.length!=0){
+                  var i=1;
+                  userData.forEach(function(data){
+                  %>
+                  <form action="/user/update-user/<%= data.user_id%>" method="POST"  enctype="multipart/form-data">
+                    <h6 class="heading-small text-muted mb-4">
+                      User information
+                    </h6>
+                    <div class="form-group">
+                      <label class="form-control-label" for="user_id"
+                        >user ID</label
+                      >
+                      <input
+                        type="text"
+                        id="user_id"
+                        name="user_id"
+                        class="form-control form-control-alternative"
+                        value="<%= data.user_id %> "
+                        <%= data.user_name %>
+                         disabled readonly
+                       
+                      />
+                    </div>
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="name"
+                              >NAME OF INSTITUTION</label
+                            >
+                            <input
+                              type="text"
+                              id="name"
+                              name="name"
+                              class="form-control form-control-alternative"
+                              value="<%= data.name %>"
+                              required
+                            />
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group focused">
+                            <label class="form-control-label" for="email"
+                              >EMAIL</label
+                            >
+                            <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              class="form-control form-control-alternative" 
+                              value="<%= data.email %>"                          
+                              required
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group focused">
+                            <label class="form-control-label" for="contact"
+                              >PHONE CONTACT</label
+                            >
+                            <input
+                              type="text"
+                              id="contact"
+                              name="mobile_phone"
+                              class="form-control form-control-alternative"
+                              value="0<%= data.mobile_phone %>"
+                              required
+                            />
+                          </div>
+                        </div>
+                     
+
+
+                        <div class="row" style="margin-top: 20px;">
+                      <div class="col-md-6 mb-4 select">
+                        <select class="select" name="region" required style="margin-bottom: 10px;">
+                          <option value="region">Region</option>
+                          <option value="Ahafo">Ahafo</option>
+                          <option value="Ashnti">Ashanti</option>
+                          <option value="Bono East">Bono East</option>
+                          <option value="Bono">Bono</option>
+                          <option value="Central">Central</option>
+                          <option value="Eastern">Eastern</option>
+                          <option value="Greater Accra">Greater Accra</option>
+                          <option value="North East">North East</option>
+                          <option value="Northern">Northern</option>
+                          <option value="Oti">Oti</option>
+                          <option value="Savannah">Savannah</option>
+                          <option value="Upper East">Upper East</option>
+                          <option value="Upper West">Upper West</option>
+                          <option value="Volta">Volta</option>
+                          <option value="Western North">Western Noth</option>
+                          <option value="Western">Western</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <select class="select" name="municipality">
+                          <option value="Municipality">Municipality</option>
+                          <option value="Asante Akim North">Asante Akim North</option>
+                          <option value="Amansie East">Amansie East</option>
+                          <option value="Mampong">Mampong</option>
+                          <option value="Offinso">Offinso</option>
+                          <option value="Asunafo North">Asunafo North</option>
+                          <option value="Berekum">Berekum</option>
+                          <option value="Dormaa">Dormaa</option>
+                          <option value="Kintampo North">Kintampo North</option>
+                          <option value="Sunyani">Sunyani</option>
+                          <option value="Techimani">Techimani</option>
+                          <option value="Wenchi">Wenchi</option>
+                          <option value="Agona West">Agona West</option>
+                          <option value="Assin North">Assin North</option>
+                          <option value="Effutu">Effutu</option>
+                          <option value="Komenda/Edina/Eguafo/Abirem">Komenda/Edina/Eguafo/Abirem</option>
+                          <option value="Komenda/Eguafo/Abirem">Komenda/Eguafo/Abirem</option>
+                          <option value="Mfatseman">Mfatseman</option>
+                          <option value="Upper Dekyira East">Upper Dekyira East</option>
+                          <option value="Akuapim South">Akuapim South</option>
+                          <option value="Birim Central">Birim Central</option>
+                          <option value="East Akim">East Akim</option>
+                          <option value="Kwahu West">Kwahu West</option>
+                          <option value="New Juaben">New Juaben</option>
+                          <option value="West Akim">West Akim</option>
+                          <option value="Adenta">Adenta</option>
+                          <option value="Ashaiman">Ashaiman</option>
+                          <option value="Ga East">Ga East</option>
+                          <option value="Ga West">Ga West</option>
+                          <option value="Ledzekuku-Krowor">Ledzekuku-Krowor</option>
+                          <option value="Weija">Weija</option>
+                          <option value="Yendi">Yendi</option>
+                          <option value="Bawku">Bawku</option>
+                          <option value="Bolgatanga">Bolgatanga</option>
+                          <option value="Wa">Wa</option>
+                          <option value="Ho">Ho</option>
+                          <option value="Hohoe">Hohoe</option>
+                          <option value="Keta">Keta</option>
+                          <option value="Nzema East">Nzema East</option>
+                          <option value="Tarkwa Nsuaem">Tarkwa Nsuaem</option>
+                          
+                         
+                        </select>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <select class="select" name="city" required>
+                          <option value="City/Town">City/Town</option>
+                          <option value="Accra">Accra</option>
+                          <option value="Kumasi">Kumasi</option>
+                          <option value="Tamale">Tamale</option>
+                          <option value="Sekondi">Sekondi</option>
+                          <option value="Obuase">Obuase</option>
+                          <option value="Tema">Tema</option>
+                          <option value="Cape Coast">Cape Coast</option>
+                          <option value="Koforidua">Koforidua</option>
+                          <option value="Ho">Ho</option>
+                          <option value="Wa">Wa</option>
+                          <option value="Bawku">Bawku</option>
+                          <option value="Sunyani">Sunyani</option>
+                          <option value="Bolgatanga">Bolgatanga</option>
+                          <option value="Aflao">Aflao</option>
+                          <option value="Nkawkaw">Nkawkaw</option>
+                          <option value="Hohoe">Hohoe</option>
+                          <option value="Winneba">Winneba</option>
+                          <option value="Berekum">Berekum</option>
+                          <option value="Techiman">Techiman</option>
+                          <option value="Sefwi Wiawso">Sefwi Wiawso</option>
+                          <option value="Goaso">Goaso</option>
+                          <option value="Dambai">Dambai</option>
+                          <option value="Nalerigu">Nalerigu</option>
+                          <option value="Damongo">Damongo</option>
+                          <option value="Kasoa">Kasoa</option>                                               
+                          
+                         
+                        </select>
+                      </div>
+                    
+                    </div>   
+                      </div>
+                     
+                   
+                   
+                    <hr class="my-4" />
+                   
+                   
+                    <hr class="my-4" />
+                    <button type="submit" class="btn btn-primary btn-block">
+                      UPDATE ADMIN INFORMATION
+                    </button>
+                  </form>
+
+                  <%  i++; }) %>
+                    <% } else{ %>
+                       <h2>Data cannot be retrieved!</h2>
+                    <% } %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © My School 2022</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- /.content-wrapper -->
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="../../../dashboard_public/vendor/jquery/jquery.min.js"></script>
+  <script src="../../../dashboard_public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="../../../dashboard_public/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Page level plugin JavaScript-->
+
+  <!-- Custom scripts for all pages-->
+  <script src="../../../dashboard_public/js/sb-user.min.js"></script>
+
+  <!-- Demo scripts for this page-->
+
+<body>
+
+
+    
+</body>
+</html>

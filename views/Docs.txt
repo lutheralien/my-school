@@ -1,0 +1,9 @@
+-The Landing Templte File Contin the PAge For The Users And The Admin.Users and Admin can Find This Link by using the route "domain/landing". for eample
+ https://www.myschol.com/landing. - If the website is hosted on the internet or
+ http://www.localhost:5000/landing. - If the website is hosted Locally on a machine.
+ 
+ -The Index Page is the Public Pge for viewing Basic Information.
+ -The Schools Page Contains the index of schools where a user cn search a school by the name of the school and the location
+ -services refers to the website's mening and what they do and the products and services htey offer
+ 
+

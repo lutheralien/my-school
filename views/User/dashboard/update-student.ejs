@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .gradient-custom {
+      /* fallback for old browsers */
+      background: #b293fb;
+
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: -webkit-linear-gradient(
+        to bottom right,
+        rgb(62, 42, 212),
+        rgb(54, 40, 216)
+      );
+
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: linear-gradient(
+        to bottom right,
+        rgb(72, 63, 238),
+        rgb(121, 58, 228)
+      );
+    }
+
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+      font-size: 1rem;
+      line-height: 2.15;
+      padding-left: 0.75em;
+      padding-right: 0.75em;
+    }
+    .card-registration .select-arrow {
+      top: 13px;
+    }
+  </style>
+  <!-- Page Loader css -->
+  <link rel="stylesheet" href="../../../dashboard_public/css/page-loader.css">
+   <link
+   href="../../../dashboard_public/vendor/bootstrap/css/bootstrap.min.css"
+   rel="stylesheet"
+ />
+
+ <!-- Custom fonts for this template-->
+
+ <link
+   rel="stylesheet"
+   href="../../../dashboard_public/vendor/fontawesome-free/css/all.min.css"
+ />
+ <!-- Page level plugin CSS-->
+
+ <!-- Custom styles for this template-->
+ <link href="../../../dashboard_public/css/sb-user.css" rel="stylesheet" />
+  <title>School Admin - Update Student Info</title>
+</head>
+
+
+<body id="page-top">
+  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+    <a class="navbar-brand mr-1" href="/user/dashboard">Menu</a>
+    <div class="loader-container">
+      <div class="spinner"></div>
+  </div>
+    
+    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+      <i class="fas fa-bars"></i>
+    </button>    
+
+    <!-- Navbar Search -->
+    <form
+      class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
+    ></form>
+
+    <!-- Navbar -->
+  </nav>
+
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="sidebar navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/user/dashboard">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/user/register-student">
+          <i class="fas fa-address-card"></i>
+          <span>Register a Student</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/user/tables">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Registered Students</span></a
+        >
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="/user/pending-school-fee">
+          <i class="fas fa-user-circle"></i>
+          <span>General Pending Arrears</span></a>
+      </li>
+     
+      <li class="nav-item">
+        <a class="nav-link" href="/user/student-data-sheet">
+          <i class="fas fa-fw fa-table"></i>
+          <span>School Data Sheet</span></a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="/user/school-settings">
+          <i class="fas fa-users-cog"></i>
+          <span>School Settings</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/user/logout">
+          <i class="fa fa-sign-out-alt"></i>
+          <span>Logout</span></a
+        >
+      </li>
+    </ul>
+
+    <div id="content-wrapper">
+      <!-- /.container-fluid -->
+      <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+              <div
+                class="card shadow-2-strong card-registration"
+                style="border-radius: 15px"
+              >
+                <div class="card-body p-4 p-md-5">
+                  <%- include('../../Includes/messages.ejs') %>
+                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Update Student Form</h3>
+                  <%
+                  if(userData.length!=0){
+                  var i=1;
+                  userData.forEach(function(data){
+                  %>
+                  <form action="/user/update-student/<%= data.student_id%>" method="POST">
+                    <h6 class="heading-small text-muted mb-4">
+                      User information
+                    </h6>
+                    <div class="form-group">
+                      <label class="form-control-label" for="student_id"
+                        >Student ID</label
+                      >
+                      <input
+                        type="text"
+                        id="student_id"
+                        name="<%= data.student_id %>"
+                        class="form-control form-control-alternative"
+                        value="<%= data.student_id %> "
+                        <%= data.student_name %>
+                         disabled readonly
+                       
+                      />
+                    </div>
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="name"
+                              >Full Name</label
+                            >
+                            <input
+                              type="text"
+                              id="name"
+                              name="student_name"
+                              class="form-control form-control-alternative"
+                              value="<%= data.student_name %>"
+                              required
+                            />
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group focused">
+                            <label class="form-control-label" for="dob"
+                              >DOB</label
+                            >
+                            <input
+                              type="date"
+                              id="dob"
+                              name="dob"
+                              class="form-control form-control-alternative" 
+                              value="<%= data.dob %>"                          
+                              required
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group focused">
+                            <label class="form-control-label" for="ParentName"
+                              >Parent Name</label
+                            >
+                            <input
+                              type="text"
+                              id="ParentName"
+                              name="parent_name"
+                              class="form-control form-control-alternative"
+                              value="<%= data.parent_name %>"
+                              required
+                            />
+                          </div>
+                        </div>
+                       
+                      </div>
+                    </div>
+                    <hr class="my-4" />
+                    
+                   
+                    <hr class="my-4" />
+                    <h6 class="heading-small text-muted mb-4">
+                      Contact information
+                    </h6>
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group focused">
+                            <label class="form-control-label" for="address"
+                              >Address</label
+                            >
+                            <input
+                              id="address"
+                              name="address"
+                              class="form-control form-control-alternative"
+                              value="<%= data.address %>"
+                              type="text"
+                              required
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        
+                        <div class="col-lg-12">
+                          <div class="form-group focused">
+                            <label class="form-control-label" for="contact"
+                              >Parent Contact</label
+                            >
+                            <input
+                              type="text"
+                              id="contact"
+                              name="parent_mobile_number"
+                              class="form-control form-control-alternative"
+                              value="<%= data.parent_mobile_number %>"
+                              required
+                            />
+                          </div>
+                          <hr class="my-4" />
+                    <h6 class="heading-small text-muted mb-4">
+                      Finance  information
+                    </h6>
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="form-group focused">
+                            <label class="form-control-label" for="previous_school_fee"
+                              > Student Arrears(&#8373;)</label
+                            >
+                            <input
+                              type="number"
+                              id="previous_school_fee"
+                              name="old_school_fee"
+                              class="form-control form-control-alternative" 
+                              value="<%= data.current_fees   %>"
+                              required                            
+                             
+                            />
+                          </div>
+                        </div>
+                       
+                        
+                      </div>
+                    </div>
+                    <hr class="my-4" />
+                    <button type="submit" class="btn btn-primary btn-block">
+                      UPDATE STUDENT INFORMATION
+                    </button>
+                  </form>
+
+                  <%  i++; }) %>
+                    <% } else{ %>
+                        <tr>
+                            <td colspan="7">No Data Found</td>
+                        </tr>
+                    <% } %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Sticky Footer -->
+      
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © My School 2022</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- /.content-wrapper -->
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+  
+ 
+  <script>
+        const loaderContainer = document.querySelector('.loader-container');
+        window.addEventListener('load', () => {
+    loaderContainer.style.display = 'none';
+});
+    </script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="../../../dashboard_public/vendor/jquery/jquery.min.js"></script>
+  <script src="../../../dashboard_public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="../../../dashboard_public/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Page level plugin JavaScript-->
+
+  <!-- Custom scripts for all pages-->
+  <script src="../../../dashboard_public/js/sb-user.min.js"></script>
+
+  <!-- Demo scripts for this page-->
+
+<body>
+
+
+    
+</body>
+</html>
