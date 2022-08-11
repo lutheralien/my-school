@@ -1,1 +1,1 @@
-let's take have some patience, readme would be soon out!
+let's have some patience, readme would be soon out!
