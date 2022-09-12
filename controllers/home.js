@@ -19,8 +19,8 @@ exports.getAbout = (req, res, next) => {
     res.render('about')
 }
 //display the Services page
-exports.getServices = (req, res, next) => {
-    res.render('services')
+exports.getBlogs = (req, res, next) => {
+    res.render('blogs')
 }
 //display the Schools page
 exports.getSchools = async (req, res, next) => {

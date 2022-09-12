@@ -4,7 +4,7 @@ const { sample } = require('lodash');
 const path = require('path');
 const mysql = require('mysql');
 const uuid = require('uuid');
-const { param } = require('../routes/user');
+// const { param } = require('../routes/user');
 
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -494,7 +494,6 @@ exports.postUpdateSchoolAdvancedInfo = async (req, res, next) => {
       res.redirect('/user/dashboard')
 }
 
-
 //post update school facilities
 exports.postUpdateSchoolFacilities = async (req, res, next) => {
     
@@ -746,7 +745,6 @@ else {
 }
 }
 
-
 exports.getSchoolSettings = async (req, res, next) => {
 
   const sql = 'SELECT * FROM user WHERE user_id = ?';
@@ -774,7 +772,7 @@ exports.postRegisterStudent = async (req, res, next) => {
   
 let student_image = req.files.student_image;
 let img_name = student_image.name;
-if(student_image.mimetype == "image/jpeg" ||student_image.mimetype == "image/png"||student_image.mimetype == "image/gif" ){
+if (student_image.mimetype == "image/jpeg" ||student_image.mimetype == "image/png"||student_image.mimetype == "image/gif" ){
   
  student_image.mv('public/dashboard_public/student_image/'+student_image.name, function(err) {
       if (err)
@@ -810,7 +808,6 @@ if(student_image.mimetype == "image/jpeg" ||student_image.mimetype == "image/png
 }
 
 //Display Update Form
-
 exports.getUpdateStudent = async (req, res, next) => {
   const sql = 'SELECT * FROM user WHERE user_id = ?';
   const user = (await queryParamPromise(sql, [req.user]))[0];
@@ -1044,4 +1041,53 @@ console.log(data)
     res.render('User/dashboard/student-data-sheet', { userData: data })
   
   
+}
+
+//Blogs
+
+exports.getBlog = (req, res, next) => {
+    res.render('User/dashboard/blogs/index')
+}
+
+exports.postBlog = async (req, res, next) => {
+const sql = 'SELECT * FROM user WHERE user_id = ?';
+const user = (await queryParamPromise(sql, [req.user]))[0];
+
+const { title, content, author } = req.body;
+const user_id = user.user_id
+
+if (!req.files){
+req.flash('error_msg', 'Add Photo!');  
+return res.redirect('/user/blog-site');
+} else {
+let blog_image = req.files.blog_image
+let img_name = blog_image.name
+
+
+const sqlDatetime = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000).toJSON().slice(0, 19).replace('T', ' ');
+
+if (blog_image.mimetype == "image/jpeg" ||blog_image.mimetype == "image/png"||blog_image.mimetype == "image/gif" ){
+  
+  blog_image.mv('public/dashboard_public/blog-images/' + img_name, function(err) {
+       if (err)
+       return res.status(500).send(err)})
+       let errors = [];
+        
+       const sql1 = db.query('INSERT INTO blogs SET ?', {
+         title: title,
+        content: content,
+        author: author,
+         blog_img: img_name,
+         date_created: sqlDatetime,
+         user_id: user_id
+       })
+   
+   req.flash('success_msg', 'Blog Published Sucessfully!');     
+   res.redirect('/user/dashboard');            
+     
+       } else {
+        req.flash('error_msg', 'image Extension not supported!');  
+        return res.redirect('/user/blog-site');
+       }
+ }
 }

@@ -125,5 +125,12 @@ router.post('/pay-school-fee/:id', requireAuth, userController.postPaySchoolFee)
 
 //display student data sheet 
 router.get('/student-data-sheet', requireAuth, userController.getStudentsDataSheet)
+
+//Blog Routes
+router.get('/blog-site', requireAuth, userController.getBlog)
+
+router.post('/blog-site', requireAuth, userController.postBlog)
+
 router.all('*', badRequest.all404Requests)
+
 module.exports = router

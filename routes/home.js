@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('/', getIp, homeController.getIndex)
 router.get('/about', getIp, homeController.getAbout)
-router.get('/services', getIp, homeController.getServices)
+router.get('/blogs', getIp, homeController.getBlogs)
 router.get('/schools', getIp, homeController.getSchools)
 router.get('/index', getIp, homeController.getLandingPage)
 router.get('/unauthorized', getIp, homeController.getError403)
