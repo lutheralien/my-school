@@ -203,7 +203,7 @@ exports.getUpdateSchoolImages = async (req, res, next) => {
 
 exports.postCreateSchoolFacilitiesImages = async (req, res, next) => {
 
-  const sql = 'SELECT * FROM user WHERE user_id = ?';
+const sql = 'SELECT * FROM user WHERE user_id = ?';
 const user = (await queryParamPromise(sql, [req.user]))[0];
 
    (await db.query('SELECT user_id from user_facilities_image WHERE user_id = ?', [user.user_id], async (err, results) => {
@@ -223,7 +223,7 @@ const user = (await queryParamPromise(sql, [req.user]))[0];
        })
         }
         const file = req.files.images;
-            const data = [];
+        const data = [];
         
         
         // if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"||file.mimetype == "image/gif" ){
