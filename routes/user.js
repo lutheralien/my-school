@@ -131,6 +131,7 @@ router.get('/blog-site', requireAuth, userController.getBlog)
 
 router.post('/blog-site', requireAuth, userController.postBlog)
 
+
 router.all('*', badRequest.all404Requests)
 
 module.exports = router

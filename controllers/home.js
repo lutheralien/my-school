@@ -9,6 +9,23 @@ const db = mysql.createConnection({
   });
  // Database query promises
 
+ const zeroParamPromise = (sql) => {
+  return new Promise((resolve, reject) => {
+    db.query(sql, (err, results) => {
+      if (err) return reject(err);
+      return resolve(results);
+    });
+  });
+};
+
+const queryParamPromise = (sql, queryParam) => {
+  return new Promise((resolve, reject) => {
+    db.query(sql, queryParam, (err, results) => {
+      if (err) return reject(err);
+      return resolve(results);
+    });
+  });
+};
 
 //display the Home Page
 exports.getIndex = (req, res, next) => {
@@ -19,8 +36,27 @@ exports.getAbout = (req, res, next) => {
     res.render('about')
 }
 //display the Services page
-exports.getBlogs = (req, res, next) => {
-    res.render('blogs')
+exports.getBlogs = async (req, res, next) => {
+  // const sql = 'SELECT * FROM user WHERE user_id = ?';
+  // const user = (await queryParamPromise(sql, [req.user]))[0];
+
+  const sql = 'SELECT * FROM blogs WHERE tag_name = ?'
+  const results = (await (queryParamPromise(sql, ['main'])))
+  // console.log(results);
+  const sql2 = 'SELECT * FROM blogs WHERE tag_name <> ?'
+  const results2 = (await (queryParamPromise(sql2, ['main'])))
+  console.log(results2);
+
+
+  res.render('blogs', { userData: results, userData2: results2 })
+}
+
+exports.getArticle = async (req, res, next) => {
+  const sql = 'SELECT * FROM blogs WHERE blog_id = ?'
+  const results = (await (queryParamPromise(sql, [req.params.id])))
+  // console.log(results);
+
+  res.render('User/dashboard/blogs/articles', { userData: results })
 }
 //display the Schools page
 exports.getSchools = async (req, res, next) => {
@@ -35,6 +71,7 @@ exports.getSchools = async (req, res, next) => {
        }))
     
 }
+
 
 //display the school's page with all information
 exports.getSchoolDescription = async (req, res, next) => {

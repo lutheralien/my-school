@@ -976,7 +976,7 @@ exports.postPaySchoolFee = async (req, res, next) => {
   const { new_school_fee, payment_date, payee_name, payee_mobile_phone } = req.body;
  
   const sql = 'SELECT * FROM user WHERE user_id = ?';
-      const user = (await queryParamPromise(sql, [req.user]))[0];
+  const user = (await queryParamPromise(sql, [req.user]))[0];
       
       (await db.query('UPDATE student SET new_school_fee = ?, payment_date = ?, payee_name = ?, payee_mobile_phone = ? WHERE user_id = ? AND student_id = ?',[new_school_fee, payment_date, payee_name, payee_mobile_phone, user.user_id, req.params.id]))
 
@@ -1042,7 +1042,6 @@ console.log(data)
   
   
 }
-
 //Blogs
 
 exports.getBlog = (req, res, next) => {
@@ -1059,9 +1058,12 @@ const user_id = user.user_id
 if (!req.files){
 req.flash('error_msg', 'Add Photo!');  
 return res.redirect('/user/blog-site');
+
 } else {
 let blog_image = req.files.blog_image
+console.log(blog_image)
 let img_name = blog_image.name
+console.log(img_name);
 
 
 const sqlDatetime = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000).toJSON().slice(0, 19).replace('T', ' ');
@@ -1077,9 +1079,9 @@ if (blog_image.mimetype == "image/jpeg" ||blog_image.mimetype == "image/png"||bl
          title: title,
         content: content,
         author: author,
-         blog_img: img_name,
-         date_created: sqlDatetime,
-         user_id: user_id
+        blog_img: img_name,
+        date_created: sqlDatetime,
+        user_id: user_id
        })
    
    req.flash('success_msg', 'Blog Published Sucessfully!');     
@@ -1091,3 +1093,4 @@ if (blog_image.mimetype == "image/jpeg" ||blog_image.mimetype == "image/png"||bl
        }
  }
 }
+
